@@ -65,7 +65,4 @@ if ! grep -q "source ~/AI_gen/bin/activate" ~/.bashrc; then
 fi
 
 echo "Done"
-echo ""
-echo "Usage:"
-echo "source ~/AI_gen/bin/activate"
-echo "python --version"
+echo "python3.10"
