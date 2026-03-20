@@ -6,7 +6,7 @@
 This script automatically configures **PWM Fan Control** on Raspberry Pi by appending settings to:
 It enables dynamic fan speed adjustment based on CPU temperature.
 ---
-### 🌡️ Fan Curve
+### Fan Curve
 | Temperature | Fan Speed |
 |------------|----------|
 | 0°C       | 25%      |
