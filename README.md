@@ -20,5 +20,6 @@ cd raspi/
 chmod +x setup_fan.sh
 ./setup_fan.sh
 sudo reboot
+```
 
-### 2. set
+### 2. Set
