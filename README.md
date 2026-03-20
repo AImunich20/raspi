@@ -14,9 +14,10 @@ It enables dynamic fan speed adjustment based on CPU temperature.
 | 2°C       | 75%      |
 | 3°C       | 100%     |
 ---
-
-### command setup pwm fan
-- `cd raspi/` — installation script
-- `chmod +x setup_fan.sh` — installation script
-- `./setup_fan.sh` — installation script
+#### 1. Create script
+```bash
+cd raspi/
+chmod +x setup_fan.sh
+./setup_fan.sh
+sudo reboot
 ---
