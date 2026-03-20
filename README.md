@@ -1,6 +1,6 @@
 # raspberry pi5 config full setup 
 
-## PWM Fan Setup for Raspberry Pi
+## 1.PWM Fan Setup for Raspberry Pi
 
 ### Overview
 
@@ -14,7 +14,7 @@
 | 2°C       | 75%      |
 | 3°C       | 100%     |
 ---
-#### 1. Create script
+#### script
 ```bash
 cd raspi/
 chmod +x setup_fan.sh
@@ -22,4 +22,4 @@ chmod +x setup_fan.sh
 sudo reboot
 ```
 
-### 2. Set
+## 2. Set python version
