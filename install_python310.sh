@@ -2,35 +2,56 @@
 
 set -e
 
+PYTHON_VERSION=3.10.13
+
 echo "Update system..."
 sudo apt update && sudo apt upgrade -y
 
 echo "Install dependencies..."
-sudo apt install -y software-properties-common \
-build-essential checkinstall \
-libreadline-gplv2-dev libncursesw5-dev libssl-dev \
-libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
-zlib1g-dev libffi-dev wget curl git
+sudo apt install -y \
+build-essential \
+checkinstall \
+libssl-dev \
+zlib1g-dev \
+libncurses5-dev \
+libncursesw5-dev \
+libreadline-dev \
+libsqlite3-dev \
+libgdbm-dev \
+libbz2-dev \
+libexpat1-dev \
+liblzma-dev \
+libffi-dev \
+uuid-dev \
+tk-dev \
+wget \
+curl \
+git
 
-echo "Install Python 3.10..."
-sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt update
-sudo apt install -y python3.10 python3.10-venv python3.10-dev python3.10-distutils
+echo "Download Python $PYTHON_VERSION..."
+cd /tmp
+wget https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz
+
+echo "Extract source..."
+tar -xvf Python-$PYTHON_VERSION.tgz
+cd Python-$PYTHON_VERSION
+
+echo "Build and install Python (this may take a while)..."
+./configure --enable-optimizations
+make -j$(nproc)
+sudo make altinstall
 
 echo "Setup pip..."
-curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.10
 
-echo "Set default python (optional)..."
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
-
-echo "Upgrade pip & install basic packages..."
+echo "Upgrade pip..."
 python3.10 -m pip install --upgrade pip setuptools wheel
 
 echo "Create virtual environment..."
-python3.10 -m venv AI_gen
+python3.10 -m venv ~/AI_gen
 
-echo "Activate environment and install common libs..."
-source AI_gen/bin/activate
+echo "Activate environment and install packages..."
+source ~/AI_gen/bin/activate
 
 pip install ultralytics flask numpy pandas matplotlib requests django jupyter
 
@@ -42,9 +63,6 @@ if ! grep -q "source ~/AI_gen/bin/activate" ~/.bashrc; then
     echo "cd ~" >> ~/.bashrc
     echo "source ~/AI_gen/bin/activate" >> ~/.bashrc
 fi
-
-echo "Reload bashrc..."
-source ~/.bashrc
 
 echo "Done"
 echo ""
